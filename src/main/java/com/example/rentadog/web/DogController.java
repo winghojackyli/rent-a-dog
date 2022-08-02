@@ -1,32 +1,3 @@
-/*package com.example.studentpractice.web;
-
-import com.example.studentpractice.entities.Student;
-import com.example.studentpractice.repositories.StudentRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
-
-@Controller
-@AllArgsConstructor
-public class StudentController {
-    @Autowired
-    private StudentRepository studentRepository;
-    @GetMapping(path = "/index")
-    public String students(Model model) {
-
-        List<Student> students = studentRepository.findAll();
-        model.addAttribute("listStudents",students);
-
-        return "students";
-    }
-}
-*/
-
-
 package com.example.rentadog.web;
 
 import com.example.rentadog.entities.User;
@@ -42,12 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -72,7 +39,7 @@ public class DogController {
 
     private UserService userService;
 
-    @GetMapping(path="/index")
+    @GetMapping(path="/")
     public String dogs(Model model, @RequestParam(name="keyword",defaultValue = "") String keyword){
 
         List<Dog> dogs;
@@ -87,13 +54,13 @@ public class DogController {
         return "index";
     }
 
-    @GetMapping("listDogs.html")
-    public String showDogs(Model model){
-        List<Dog> dogs = dogRepository.findAll();
-        model.addAttribute("listDogs", dogs);
-        return "/listDogs.html";
-
-    }
+//    @GetMapping("listDogs.html")
+//    public String showDogs(Model model){
+//        List<Dog> dogs = dogRepository.findAll();
+//        model.addAttribute("listDogs", dogs);
+//        return "/listDogs.html";
+//
+//    }
 
     //dog owner registration
     @GetMapping("/formDogRegister")

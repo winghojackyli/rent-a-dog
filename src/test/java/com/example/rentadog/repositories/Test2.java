@@ -10,12 +10,9 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.View;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -43,7 +40,6 @@ class Test2 {
         mockMvc = standaloneSetup(dogController).setSingleView(mockView).build();
     }
 
-
     @Test
     void finddogbybreedtest() throws Exception {
         Dog d=new Dog();
@@ -60,6 +56,23 @@ class Test2 {
                 .andExpect(model().attribute("listDogs", hasSize(1)));
 
         verify(dogRepository, times(1)).findDogByBreed(anyString());
+        verifyNoMoreInteractions(dogRepository);
+    }
+
+    @Test
+    void showdogtest() throws Exception {
+        Dog d = new Dog();
+        List<Dog> dogList = new ArrayList<>();
+        dogList.add(d);
+
+        when(dogRepository.findAll()).thenReturn(dogList);
+        mockMvc.perform(get("/index"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("listDogs", dogList))
+                .andExpect(view().name("index"))
+                .andExpect(model().attribute("listDogs", hasSize(1)));
+
+        verify(dogRepository, times(1)).findAll();
         verifyNoMoreInteractions(dogRepository);
     }
 
