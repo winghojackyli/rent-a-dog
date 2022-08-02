@@ -54,14 +54,6 @@ public class DogController {
         return "index";
     }
 
-//    @GetMapping("listDogs.html")
-//    public String showDogs(Model model){
-//        List<Dog> dogs = dogRepository.findAll();
-//        model.addAttribute("listDogs", dogs);
-//        return "/listDogs.html";
-//
-//    }
-
     //dog owner registration
     @GetMapping("/formDogRegister")
     public String formDogs(Model model){
@@ -84,7 +76,7 @@ public class DogController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     //login
@@ -95,7 +87,7 @@ public class DogController {
 
     @PostMapping("login")
     public String loginAccount(@RequestParam("email") String email, @RequestParam("password") String password){
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     //customer registration
@@ -115,11 +107,10 @@ public class DogController {
 
         userService.saveUser(user);
 
-        return "redirect:index";
+        return "redirect:/";
     }
 
     //dog profile pages
-    //@GetMapping("/profile/{id}")
     @RequestMapping(value="/profile/{id}")
     public String showProfile(@PathVariable("id") Long id, Model model){
         Dog dog = dogRepository.findById(id).orElse(null);
@@ -162,7 +153,7 @@ public class DogController {
                         "a pick-up or notify customer of the rental refusal.",
                 "You've received a new rental request!");
 
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     @GetMapping("/reviewForm/{id}")
@@ -178,7 +169,7 @@ public class DogController {
     @PostMapping("/saveReview")
     public String saveReview(@RequestParam("fullName") String fullName, @RequestParam("review") String review, @RequestParam("ownerId") Long ownerId){
         reviewService.saveReviewToDB(fullName, review, ownerId);
-        return "redirect:/index";
+        return "redirect:/";
     }
 
 }
