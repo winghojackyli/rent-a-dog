@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1"
+>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <style>
+        * {
+            color: #3F5378;
+        }
+
+        .container-sm {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            color: #3F5378;
+        }
+
+        .main_image {
+            padding: 20px;
+        }
+
+        .img {
+            padding: 10px;
+        }
+
+        .modal {
+            width: 60%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 40%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: white;
+        }
+
+        #reviewer{
+            font-weight: lighter;
+            font-size: 18px;
+            padding-bottom:0px;
+            margin-bottom: 0px;
+        }
+    </style>
+
+    <script>
+        function showContact() {
+
+            let modal = document.getElementById('myModal');
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            let modal = document.getElementById('myModal');
+            modal.style.display = "none";
+        }
+
+    </script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container-sm">
+        <div class="card">
+            <div class="row g-0">
+                <div class="col-md-6 border-end" th:each="d: ${listDogs}">
+                    <div class="d-flex flex-column justify-content-center">
+                        <div class="main_image rounded mx-auto d-block">
+                            <img th:src="'data:image/jpeg;base64,' + ${listDogs.image1}" id="main_product_image"
+                                 width="500" height="500" name="image1">
+                        </div>
+                        <div class="container-sm d-flex justify-content-center">
+                            <img class="img" th:src="'data:image/jpeg;base64,' + ${listDogs.image2}" width="200"
+                                 height="200">
+                            <img class="img" th:src="'data:image/jpeg;base64,' + ${listDogs.image3}" width="200"
+                                 height="200">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" th:each="d: ${listDogs}">
+                    <div class="p-3 right-side">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 th:text="${d.dogName}"></h3>
+                            <span class="heart"><i class='bx bx-heart'></i></span>
+                        </div>
+                        <div class="mt-2 pr-3 content">
+                            <p th:text="'Location: ' + ${d.location}"></p>
+                            <p th:text="'Breed: ' + ${d.breed}"></p>
+                            <p th:text="'Sex: ' + ${d.sex}"></p>
+                        </div>
+
+                        <h4>Reviews</h4>
+                        <div th:each="r:${reviews}">
+                            <p id="reviewer" th:text="${r.fullName}"></p>
+                            <p class="card-text" th:text="${r.review}"></p>
+                            <hr>
+                        </div>
+                        <div class="buttons d-flex flex-row mt-5 gap-3">
+                            <button class="btn btn-outline-dark" id="myBtn" onclick="showContact()">View Contact
+                                Details
+                            </button>
+                            <button class="btn btn-outline-dark"><a th:href="@{/profile/{id}/rentalForm(id=${d.id})}">Rent
+                                Dog</a></button>
+                            <button class="btn btn-outline-dark"><a th:href="@{/reviewForm/{id}(id=${d.id})}">Write a
+                                Review</a></button>
+
+                            <!--Modal-->
+                            <div id="myModal" class="modal">
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Contact Details</h5>
+                                        <span class="close" onclick="closeModal()">&times;</span>
+                                    </div>
+
+                                    <div class="modal-body" th:each="d: ${listDogs}">
+                                        <p th:text="${d.ownerName}"></p>
+                                        <p th:text="${d.email}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>

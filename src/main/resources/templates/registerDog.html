@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1"
+      >
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <style>
+    *{
+      color:#3F5378;
+    }
+
+    h1{
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .btn-primary{
+      margin-bottom: 20px;
+      background-color: #3F5378 !important;
+      border:none;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+
+<body>
+  <section layout:fragment="content">
+    <div class="col-md-6 offset-3">
+      <!--    enctype lets you upload a file-->
+      <form method="post" action="/addDog" enctype="multipart/form-data">
+        <h1> Register as a Dog Owner</h1>
+        <div>
+          <label>Dog's Name</label>
+          <input class="form-control" type="text" name="dog">
+        </div>
+        <div>
+          <label>Owner's Name</label>
+          <input class="form-control" type="text" name="owner">
+        </div>
+        <div>
+          <label>Email</label>
+          <input class="form-control" type="text" name="email">
+        </div>
+        <div>
+          <label>Location</label>
+          <input class="form-control" type="text" name="location">
+        </div>
+        <div>
+          <label>Dog Breed</label>
+          <input class="form-control" type="text" name="breed">
+        </div>
+        <div>
+          <label>Dog Sex (M/F)</label>
+          <input class="form-control" type="text" name="sex">
+        </div>
+        <label>Add your images (Note: Please keep file size under 500KB)</label>
+        <br>
+        <div>
+          <input type="file" class="form-control" id="inputGroupFile01" name="image1"><br>
+          <input type="file" class="form-control" id="inputGroupFile02" name="image2"><br>
+          <input type="file" class="form-control" id="inputGroupFile03" name="image3">
+        </div>
+        <br>
+        <button type="submit" class="btn-primary" th:href="@{/index}">Register</button>
+      </form>
+    </div>
+  </section>
+</body>
+</html>
