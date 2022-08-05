@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `dog`
 --
-use heroku_6e7169a3f747c3a;
+use heroku_757aa6795ba27ff;
 
 CREATE TABLE `dog` (
   `id` bigint(20) NOT NULL,
